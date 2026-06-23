@@ -59,7 +59,7 @@ class FinancialRAG:
         #     google_api_key=self.api_key,
         # )
         self.embeddings = HuggingFaceEndpointEmbeddings(
-            model_name="sentence-transformers/all-MiniLM-L6-v2",
+            model="sentence-transformers/all-MiniLM-L6-v2",
             huggingfacehub_api_token=os.environ.get("HUGGINGFACE_API_KEY"),
         )
         # self.llm = ChatGoogleGenerativeAI(
