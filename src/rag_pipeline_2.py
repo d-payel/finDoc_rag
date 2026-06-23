@@ -18,6 +18,7 @@ from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 
 load_dotenv()
 
@@ -57,7 +58,7 @@ class FinancialRAG:
         #     model="models/gemini-embedding-001",   # ← change to this
         #     google_api_key=self.api_key,
         # )
-        self.embeddings = HuggingFaceEmbeddings(
+        self.embeddings = HuggingFaceEndpointEmbeddings(
             model_name="sentence-transformers/all-MiniLM-L6-v2",
             huggingfacehub_api_token=os.environ.get("HUGGINGFACE_API_KEY"),
         )
