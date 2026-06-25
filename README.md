@@ -1,8 +1,8 @@
 #  FinDoc RAG — Financial Report Intelligence
 
-A production-style **Retrieval-Augmented Generation (RAG)** system that lets you ask natural-language questions over any financial PDF — annual reports, SEC 10-K filings, earnings releases.
+A production-style **Retrieval-Augmented Generation (RAG)** system that lets you ask natural-language questions over any financial PDF annual reports, SEC 10-K filings, earnings releases.
 
-<img src="https://github.com/d-payel/gifs_/blob/main/working_gif_git.gif" width="40" height="40" align="center" /> Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
+<img src="https://github.com/d-payel/gifs_/blob/main/working_gif_git.gif" width="40" height="40" align="center" /> Built with **LangChain · ChromaDB · HuggingFace Embeddings · LLaMA · Streamlit**.
 
 ---
 
