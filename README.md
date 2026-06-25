@@ -2,7 +2,7 @@
 
 A production-style **Retrieval-Augmented Generation (RAG)** system that lets you ask natural-language questions over any financial PDF — annual reports, SEC 10-K filings, earnings releases.
 
-Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
+<img src="https://github.com/d-payel/gifs_/blob/main/working_gif_git.gif" width="40" height="40" />  Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
 
 ---
 
@@ -58,7 +58,7 @@ Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
 
 ---
 
-## <img src="https://github.com/d-payel/gifs_/blob/main/working_gif_git.gif" width="40" height="40" /> Quick Start
+##  Quick Start
 
 ```bash
 # 1. Clone and install
