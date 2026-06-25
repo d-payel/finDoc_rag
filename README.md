@@ -46,7 +46,7 @@ A production-style **Retrieval-Augmented Generation (RAG)** system that lets you
 
 ---
 
-##  Features
+## <img src="https://github.com/d-payel/gifs_/blob/main/start_gif.gif" width="40" height="40" align="center" />  Features
 
 | Feature | Details |
 |---|---|
