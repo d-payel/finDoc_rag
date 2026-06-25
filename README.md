@@ -58,6 +58,37 @@ A production-style **Retrieval-Augmented Generation (RAG)** system that lets you
 
 ---
 
+##  Project Structure
+
+```
+financial-rag/
+├── app.py                  # Streamlit UI
+├── src/
+│   ├── rag_pipeline.py     # Core RAG: PDF parsing, embedding, retrieval, chain
+│   └── utils.py            # Helper functions
+├── requirements.txt
+└── README.md
+```
+
+---
+
+##  Key Technical Decisions
+
+**Chunking**: 800-token chunks with 120-token overlap using `RecursiveCharacterTextSplitter` — splits on paragraph breaks first, then sentences, never mid-word. Balances context richness with retrieval precision for dense financial prose.
+
+**MMR Retrieval**: Chosen over pure cosine similarity to reduce redundancy when the same figure appears repeatedly (e.g., AUM mentioned 50+ times in an annual report). Fetches 20 candidates, returns the 5 most diverse and relevant.
+
+**Cosine Similarity**: ChromaDB configured with `hnsw:space: cosine` instead of the default L2 distance — cosine is more appropriate for semantic embeddings where directional similarity matters more than magnitude.
+
+**HuggingFace Embeddings**: `sentence-transformers/all-MiniLM-L6-v2` runs via HuggingFace Inference API — no rate limits from API providers, no regional restrictions, no cost.
+
+**Groq LLaMA 3**: Free inference with sub-5s latency on the free tier. Swap to `gpt-4o` for production-grade financial reasoning accuracy.
+
+**ChromaDB in-memory**: Zero setup, no external services needed for prototyping. For production, swap to persistent ChromaDB with `persist_directory` or a managed vector store like Pinecone — eliminates re-embedding on every session.
+
+**LCEL Pipeline**: Built using LangChain Expression Language (`|` pipe syntax) instead of deprecated chain classes — modern, composable, and easier to extend with additional steps like guardrails or reranking.
+
+---
 ##  Quick Start
 
 ```bash
@@ -98,32 +129,6 @@ Enter your **OpenAI API key** in the sidebar, upload a PDF, click **Build Knowle
 
 ---
 
-##  Project Structure
-
-```
-financial-rag/
-├── app.py                  # Streamlit UI
-├── src/
-│   ├── rag_pipeline.py     # Core RAG: PDF parsing, embedding, retrieval, chain
-│   └── utils.py            # Helper functions
-├── requirements.txt
-└── README.md
-```
-
----
-
-## 🔧 Key Technical Decisions
-
-**Chunking**: 800-token chunks with 120-token overlap — balances context richness with retrieval precision for dense financial prose.
-
-**MMR Retrieval**: Chosen over simple similarity search to reduce redundancy when the same figure appears many times (e.g., AUM mentioned 50+ times in an annual report).
-
-**GPT-4o-mini**: Cost-efficient for demo; swap to `gpt-4o` for production-grade accuracy.
-
-**ChromaDB in-memory**: No setup needed; swap to persistent ChromaDB or Pinecone for production.
-
----
-
 ##  Potential Extensions
 
 - [ ] **Hybrid search** — combine vector + BM25 keyword search (LangChain `EnsembleRetriever`)
@@ -131,13 +136,3 @@ financial-rag/
 - [ ] **RAGAS evaluation** — automated faithfulness + answer relevancy scoring
 - [ ] **Table extraction** — use `pdfplumber` to parse financial tables as structured data
 - [ ] **Streaming responses** — LangChain streaming callbacks for faster UX
-
----
-
-##  Built With
-
-- [LangChain](https://langchain.com) — RAG orchestration
-- [ChromaDB](https://trychroma.com) — vector store
-- [OpenAI](https://openai.com) — embeddings (`text-embedding-3-small`) + LLM (`gpt-4o-mini`)
-- [PyMuPDF](https://pymupdf.readthedocs.io) — PDF parsing
-- [Streamlit](https://streamlit.io) — UI
