@@ -58,7 +58,7 @@ Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
 
 ---
 
-##  Quick Start
+## <img src="https://github.com/d-payel/gifs_/blob/main/working_gif_git.gif" width="40" height="40" /> Quick Start
 
 ```bash
 # 1. Clone and install
