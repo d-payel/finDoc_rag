@@ -1,4 +1,4 @@
-# 📊 FinDoc RAG — Financial Report Intelligence
+#  FinDoc RAG — Financial Report Intelligence
 
 A production-style **Retrieval-Augmented Generation (RAG)** system that lets you ask natural-language questions over any financial PDF — annual reports, SEC 10-K filings, earnings releases.
 
@@ -6,7 +6,7 @@ Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -45,7 +45,7 @@ Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Details |
 |---|---|
@@ -58,7 +58,7 @@ Built with **LangChain · ChromaDB · OpenAI · Streamlit**.
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ```bash
 # 1. Clone and install
@@ -74,7 +74,7 @@ Enter your **OpenAI API key** in the sidebar, upload a PDF, click **Build Knowle
 
 ---
 
-## 📁 Where to Get Financial PDFs
+##  Where to Get Financial PDFs
 
 ### Free Official Sources
 
@@ -98,7 +98,7 @@ Enter your **OpenAI API key** in the sidebar, upload a PDF, click **Build Knowle
 
 ---
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
 financial-rag/
@@ -124,7 +124,7 @@ financial-rag/
 
 ---
 
-## 📈 Potential Extensions
+##  Potential Extensions
 
 - [ ] **Hybrid search** — combine vector + BM25 keyword search (LangChain `EnsembleRetriever`)
 - [ ] **Multi-document** — compare two company annual reports side by side
@@ -134,7 +134,7 @@ financial-rag/
 
 ---
 
-## 🛠️ Built With
+##  Built With
 
 - [LangChain](https://langchain.com) — RAG orchestration
 - [ChromaDB](https://trychroma.com) — vector store
