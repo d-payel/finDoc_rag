@@ -127,10 +127,7 @@ class FinancialRAG:
         return chunks
         
     def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
-        if self.vectorstore is not None:
-            self.vectorstore.delete_collection()
-            self.vectorstore = None
-    
+        """Embed chunks and store in ChromaDB (in-memory)."""
         vectorstore = Chroma.from_documents(
             documents=chunks,
             embedding=self.embeddings,
@@ -138,15 +135,6 @@ class FinancialRAG:
             collection_metadata={"hnsw:space": "cosine"},
         )
         return vectorstore
-    # def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
-    #     """Embed chunks and store in ChromaDB (in-memory)."""
-    #     vectorstore = Chroma.from_documents(
-    #         documents=chunks,
-    #         embedding=self.embeddings,
-    #         collection_name="financial_docs",
-    #         collection_metadata={"hnsw:space": "cosine"},
-    #     )
-    #     return vectorstore
         
 
     # def _build_chain(self):
@@ -331,8 +319,8 @@ Share repurchases totaled $1.8 billion during the year.
             sources.append({
                 "page": doc.metadata.get("page", "?"),
                 "text": doc.page_content[:300] + "...",
-                #"score": round(float(score), 3),
-                "score": round(min(max(float(1 - score), 0.0), 1.0), 3),
+                "score": round(float(score), 3),
+                #"score": round(min(max(float(1 - score), 0.0), 1.0), 3),
             })
         
         self.chat_history.append({"human": question, "assistant": answer})
