@@ -1,4 +1,4 @@
-#  FinDoc RAG — Financial Report Intelligence
+#  FinDoc RAG : Financial Report Intelligence
 
 A production-style **Retrieval-Augmented Generation (RAG)** system that lets you ask natural-language questions over any financial PDF annual reports, SEC 10-K filings, earnings releases.
 
