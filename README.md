@@ -18,22 +18,23 @@ A production-style **Retrieval-Augmented Generation (RAG)** system that lets you
           └───────────────┬───────────────┘
                           │
           ┌───────────────v───────────────────────────────────┐
-          │              RAG Pipeline (LangChain)             │
+          │           RAG Pipeline (LangChain LCEL)           │
           │                                                   │
           │  ┌───────────┐    ┌───────────┐    ┌───────────┐  │
           │  │    PDF    │    │   Text    │    │ Embedding │  │
-          │  │  Parser   │───>│  Chunker  │───>│ (OpenAI)  │  │
-          │  │ (PyMuPDF) │    │  800tok   │    │  ada-003  │  │
+          │  │  Parser   │───>│  Chunker  │───>│    (HF    │  │
+          │  │ (PyMuPDF) │    │  800tok   │    │ MiniLM)   │  │
           │  └───────────┘    └───────────┘    └─────┬─────┘  │
           │                                          │        │
           │  ┌───────────────────────────────────────v─────┐  │
-          │  │             ChromaDB Vector Store           │  │
-          │  │    (MMR Retrieval - top 5 diverse chunks)   │  │
+          │  │          ChromaDB Vector Store              │  │
+          │  │  (Cosine Similarity · MMR · top 5 chunks)   │  │
           │  └─────────────────────────────────────┬───────┘  │
           │                                        │          │
           │  ┌─────────────────────────────────────v───────┐  │
-          │  │  ConversationalRetrievalChain (GPT-4o-mini) │  │
-          │  │        + WindowMemory (last 5 turns)        │  │
+          │  │         LCEL Chain (Groq LLaMA 3)           │  │
+          │  │   RunnablePassthrough · StrOutputParser     │  │
+          │  │      + Manual Memory (last 5 turns)         │  │
           │  └─────────────────────────────────────┬───────┘  │
           │                                        │          │
           └────────────────────────────────────────┼──────────┘
