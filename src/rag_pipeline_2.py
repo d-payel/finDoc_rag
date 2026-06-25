@@ -318,7 +318,8 @@ Share repurchases totaled $1.8 billion during the year.
             sources.append({
                 "page": doc.metadata.get("page", "?"),
                 "text": doc.page_content[:300] + "...",
-                "score": round(float(score), 3),
+                #"score": round(float(score), 3),
+                "score": round(min(max(float(1 - score), 0.0), 1.0), 3),
             })
         
         self.chat_history.append({"human": question, "assistant": answer})
