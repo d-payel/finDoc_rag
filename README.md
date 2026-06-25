@@ -50,7 +50,7 @@ A production-style **Retrieval-Augmented Generation (RAG)** system that lets you
 
 | Feature | Details |
 |---|---|
-| **Multi-turn chat** | Conversation memory (last 5 turns via `ConversationBufferWindowMemory`) |
+| **Multi-turn chat** | Conversation memory (last 5 turns via manual chat history list) |
 | **Source citations** | Every answer shows source page, relevance score, and passage snippet |
 | **MMR Retrieval** | Max Marginal Relevance ensures diverse, non-redundant context chunks |
 | **Finance-tuned prompt** | System prompt engineered for financial precision, no hallucinated figures |
@@ -97,7 +97,7 @@ financial-rag/
 git clone https://github.com/yourusername/financial-rag
 cd financial-rag
 pip install -r requirements.txt
-
+Add your `GROQ_API_KEY` and `HUGGINGFACE_API_KEY` to a `.env` file.
 # 2. Run
 streamlit run app.py
 ```
