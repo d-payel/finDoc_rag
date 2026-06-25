@@ -125,9 +125,12 @@ class FinancialRAG:
                     metadata={**doc.metadata, "chunk": i}
                 ))
         return chunks
-
+        
     def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
-        """Embed chunks and store in ChromaDB (in-memory)."""
+        if self.vectorstore is not None:
+            self.vectorstore.delete_collection()
+            self.vectorstore = None
+    
         vectorstore = Chroma.from_documents(
             documents=chunks,
             embedding=self.embeddings,
@@ -135,6 +138,16 @@ class FinancialRAG:
             collection_metadata={"hnsw:space": "cosine"},
         )
         return vectorstore
+    # def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
+    #     """Embed chunks and store in ChromaDB (in-memory)."""
+    #     vectorstore = Chroma.from_documents(
+    #         documents=chunks,
+    #         embedding=self.embeddings,
+    #         collection_name="financial_docs",
+    #         collection_metadata={"hnsw:space": "cosine"},
+    #     )
+    #     return vectorstore
+        
 
     # def _build_chain(self):
     #     """Build the retrieval chain."""
