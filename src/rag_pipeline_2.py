@@ -53,21 +53,21 @@ class FinancialRAG:
         self.groq_api_key = os.environ.get("GROQ_API_KEY")
 
         # Gemini embeddings — free tier
-        
         # self.embeddings = GoogleGenerativeAIEmbeddings(
         #     model="models/gemini-embedding-001",   # ← change to this
         #     google_api_key=self.api_key,
         # )
-        self.embeddings = HuggingFaceEndpointEmbeddings(
-            model="sentence-transformers/all-MiniLM-L6-v2",
-            huggingfacehub_api_token=os.environ.get("HUGGINGFACE_API_KEY"),
-        )
         # self.llm = ChatGoogleGenerativeAI(
             
         #     model="models/gemini-2.0-flash-lite",
         #     temperature=0.1,
         #     google_api_key=api_key,
         # )
+
+        self.embeddings = HuggingFaceEndpointEmbeddings(
+            model="sentence-transformers/all-MiniLM-L6-v2",
+            huggingfacehub_api_token=os.environ.get("HUGGINGFACE_API_KEY"),
+        )
         self.llm = ChatGroq(
             model="llama-3.1-8b-instant",
             temperature=0.1,
@@ -77,10 +77,8 @@ class FinancialRAG:
         self.vectorstore = None
         self.chain = None
         self._chroma_client = None 
-
-        # Simple manual memory (list of dicts) — no langchain_classic needed
-        self.chat_history: list[dict] = []
-
+        self.chat_history: list[dict] = []    # Simple manual memory (list of dicts)
+        self._last_docs = []
         self.splitter = RecursiveCharacterTextSplitter(
             chunk_size=800,
             chunk_overlap=120,
@@ -326,11 +324,11 @@ Share repurchases totaled $1.8 billion during the year.
             sources.append({
                 "page": doc.metadata.get("page", "?"),
                 "text": doc.page_content[:300] + "...",
-                #"score": round(float(score), 3),
-                "score": round(min(max(float(1 - score), 0.0), 1.0), 3),
+                "score": round(float(score), 3),
+                #"score": round(min(max(float(1 - score), 0.0), 1.0), 3),
             })
         
-        self.chat_history.append({"human": question, "assistant": answer})
+        #self.chat_history.append({"human": question, "assistant": answer})
         return {"answer": answer, "sources": sources}
 
     def _get_similarity_score(self, query: str, text: str) -> float:
