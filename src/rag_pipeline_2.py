@@ -76,6 +76,7 @@ class FinancialRAG:
 
         self.vectorstore = None
         self.chain = None
+        self._chroma_client = None 
 
         # Simple manual memory (list of dicts) — no langchain_classic needed
         self.chat_history: list[dict] = []
