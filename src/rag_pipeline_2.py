@@ -144,14 +144,6 @@ class FinancialRAG:
         vectorstore.add_documents(chunks)
         return vectorstore
 
-    # def _build_chain(self):
-    #     """Build the retrieval chain."""
-    #     retriever = self.vectorstore.as_retriever(
-    #         search_type="mmr",
-    #         search_kwargs={"k": 5, "fetch_k": 20},
-    #     )
-    #     combine_docs_chain = create_stuff_documents_chain(self.llm, FINANCE_PROMPT)
-    #     self.chain = create_retrieval_chain(retriever, combine_docs_chain)
     def _build_chain(self):
         """Build LCEL retrieval chain — modern standard, no deprecated classes."""
         retriever = self.vectorstore.as_retriever(
