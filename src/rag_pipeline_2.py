@@ -125,14 +125,23 @@ class FinancialRAG:
                     metadata={**doc.metadata, "chunk": i}
                 ))
         return chunks
+
+    def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
+        # Store client as instance variable so it doesn't get garbage collected
+        self._chroma_client = chromadb.EphemeralClient()
         
-   def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
-       self._chroma_client = chromadb.EphemeralClient()
-       self._chroma_client.create_collection(name="financial_docs", metadata={"hnsw:space": "cosine"})
-       vectorstore = Chroma(client=self._chroma_client, collection_name="financial_docs", embedding_function=self.embeddings,)
-       vectorstore.add_documents(chunks)
-       return vectorstore
-    
+        self._chroma_client.create_collection(
+            name="financial_docs",
+            metadata={"hnsw:space": "cosine"}
+        )
+        
+        vectorstore = Chroma(
+            client=self._chroma_client,
+            collection_name="financial_docs",
+            embedding_function=self.embeddings,
+        )
+        vectorstore.add_documents(chunks)
+        return vectorstore
 
     # def _build_chain(self):
     #     """Build the retrieval chain."""
