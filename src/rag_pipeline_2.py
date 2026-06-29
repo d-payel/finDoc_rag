@@ -136,17 +136,17 @@ class FinancialRAG:
     #     )
     #     return vectorstore
 
-    def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
-        client = chromadb.EphemeralClient()
+   def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
+    # Store client as instance variable so it doesn't get garbage collected
+        self._chroma_client = chromadb.EphemeralClient()
         
-        # Create collection with cosine explicitly
-        client.create_collection(
+        self._chroma_client.create_collection(
             name="financial_docs",
             metadata={"hnsw:space": "cosine"}
         )
         
         vectorstore = Chroma(
-            client=client,
+            client=self._chroma_client,
             collection_name="financial_docs",
             embedding_function=self.embeddings,
         )
