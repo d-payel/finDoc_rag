@@ -9,6 +9,7 @@ from typing import Any
 import fitz
 from dotenv import load_dotenv
 import chromadb
+import chromadb.api
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 #from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_chroma import Chroma
@@ -127,6 +128,7 @@ class FinancialRAG:
 
     def _build_vectorstore(self, chunks: list[Document]) -> Chroma:
         # Store client as instance variable so it doesn't get garbage collected
+        chromadb.api.client.SharedSystemClient.clear_system_cache()
         self._chroma_client = chromadb.EphemeralClient()
         
         self._chroma_client.create_collection(
