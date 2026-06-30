@@ -102,8 +102,6 @@ Add your `GROQ_API_KEY` and `HUGGINGFACE_API_KEY` to a `.env` file.
 streamlit run app.py
 ```
 
-Enter your **OpenAI API key** in the sidebar, upload a PDF, click **Build Knowledge Base**, and start asking.
-
 ---
 
 ##  Where to Get Financial PDFs
